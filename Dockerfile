@@ -43,7 +43,7 @@ RUN  \
   sudo -u jenkins makepkg -si --noconfirm --needed
 
 # Install all devkitPro packages. Hacky. Based on buildservnx 4's reinstall.sh
-RUN DEVKITLIBS=$(pacman -Sl dkp-libs | awk '{print $2}' | tr '\n' ' ') ; \
+RUN DEVKITLIBS=$(pacman -Sl dkp-libs | grep -v "crtls" | awk '{print $2}' | tr '\n' ' ') ; \
     DEVKITLINUX=$(pacman -Sl dkp-linux | grep -v "keyring" | awk '{print $2}' | tr '\n' ' ') ; \
     pacman -Syu $DEVKITLIBS $DEVKITLINUX --noconfirm
 
